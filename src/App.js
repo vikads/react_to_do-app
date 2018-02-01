@@ -14,6 +14,11 @@ class App extends Component {
     };
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('handleSubmit called');
+  }
+
   toggleComplete(index) {
     const todos = this.state.todos.slice();
     const todo = todos[index];
@@ -38,6 +43,10 @@ class App extends Component {
           // The key gives React a reliable way of distinguishing between array items.
           */}
         </ul>
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <input type="text" />
+          <input type="submit" />
+        </form>
       </div>
     );
   }
