@@ -14,13 +14,16 @@ class App extends Component {
     };
   }
 
+  toggleComplete() {
+    console.log('toggleComplete executed');
+  }
 
   render() {
     return (
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index }  description={ todo.description } isCompleted={ todo.isCompleted }/>
+            <ToDo key={ index }  description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }/>
             // in the ToDo component, we can now access those props on this.props object
           )}
           {/*We use an ES6 arrow function for convenience,//
