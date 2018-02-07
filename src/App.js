@@ -35,13 +35,10 @@ class App extends Component {
   }
 
   deleteTodo(index) {
-    console.log("Trying to delete todo with index: ", index)
+
     const todos = this.state.todos.slice();
-    console.log("todos: ", todos);
-    const newTodos = todos.filter( (todo, todoIndex) => todoIndex !== index )
-    console.log("newTodos: ", newTodos);
+    const newTodos = todos.filter( (newTodo, newTodoIndex) => newTodoIndex !== index )
     this.setState({ todos: newTodos });
-    console.log("this.state: ", this.state);
   }
 
   render() {
