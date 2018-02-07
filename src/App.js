@@ -23,14 +23,25 @@ class App extends Component {
     e.preventDefault();
     if (!this.state.newTodoDescription) { return }
     const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
-    this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' }); 
+    this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
   }
 
   toggleComplete(index) {
+    console.log("Toggling complete for index: ", index);
     const todos = this.state.todos.slice();
     const todo = todos[index];
     todo.isCompleted = todo.isCompleted ? false : true;
     this.setState({ todos: todos });
+  }
+
+  deleteTodo(index) {
+    console.log("Trying to delete todo with index: ", index)
+    const todos = this.state.todos.slice();
+    console.log("todos: ", todos);
+    const newTodos = todos.filter( (todo, todoIndex) => todoIndex !== index )
+    console.log("newTodos: ", newTodos);
+    this.setState({ todos: newTodos });
+    console.log("this.state: ", this.state);
   }
 
   render() {
@@ -38,7 +49,12 @@ class App extends Component {
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index }  description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }/>
+            <ToDo key={ index }
+              description={ todo.description }
+              isCompleted={ todo.isCompleted }
+              toggleComplete={ () => this.toggleComplete(index) }
+              deleteTodo={ () => this.deleteTodo(index) }
+              />
             // in the ToDo component, we can now access those props on this.props object
           )}
           {/*We use an ES6 arrow function for convenience,//
